@@ -1,0 +1,55 @@
+/* Загальні стилі для сторінки */
+div {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Стилі для кнопки "Go Back" */
+.buttonBack {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.buttonBack:hover {
+  background-color: #0056b3;
+}
+
+.buttonBack:focus {
+  outline: none;
+}
+
+/* Стилі для картинки */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+/* Якщо дані не завантажено */
+p {
+  font-size: 1.2rem;
+  color: #888;
+  text-align: center;
+  font-style: italic;
+}
