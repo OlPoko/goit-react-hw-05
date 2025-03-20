@@ -1,44 +1,54 @@
+/* Navigation.module.css */
 .header {
-  position: fixed;
+  position: fixed; /* Фіксований хедер */
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #f8f9fa;
-  padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  height: 60px; /* Фіксована висота хедера */
+  background-color: #ffffff; /* Білий фон */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тінь для ефекту підняття */
+  z-index: 1000; /* Забезпечує, що хедер завжди зверху */
+  padding: 1rem 2rem; /* Відступи всередині хедера */
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Елементи розташовані по краях */
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* Стилі для навігації (якщо потрібно) */
+.nav {
   display: flex;
-  gap: 1rem;
-  justify-content: flex-start;
+  gap: 1.5rem; /* Відступ між елементами навігації */
 }
 
-nav ul li {
-  margin: 0;
-}
-
-nav ul li a {
-  color: #333;
+/* Стилі для посилань у навігації */
+.navLink {
   text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  color: #333333; /* Колір тексту */
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease; /* Плавна зміна кольору */
 }
 
-nav ul li a:hover {
-  background-color: #e9ecef;
-  color: #007bff;
+.navLink:hover {
+  color: #007bff; /* Колір при наведенні */
 }
 
-nav ul li a.active {
-  background-color: #007bff;
-  color: white;
+/* Активний пункт меню */
+.navLink.active {
+  color: #007bff; /* Колір активного посилання */
+  font-weight: bold;
+}
+
+/* Медіа-запити для адаптивності */
+@media (max-width: 768px) {
+  .header {
+    padding: 0.75rem 1rem; /* Менші відступи на малих екранах */
+  }
+
+  .nav {
+    gap: 1rem; /* Менший відступ між елементами */
+  }
+
+  .navLink {
+    font-size: 0.9rem; /* Менший розмір шрифту */
+  }
 }

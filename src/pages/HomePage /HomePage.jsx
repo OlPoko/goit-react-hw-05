@@ -31,16 +31,18 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className={css.container}>
-      <h1>Trending Movies Today</h1>
+    <div className={css.containerHomePage}>
+      <h1 className={css.pHomePage}>Trending Movies Today</h1>
       {error ? (
-        <p>{error}</p>
+        <p className={css.error}>{error}</p>
       ) : loading ? (
-        <p>Loading...</p>
+        <p className={css.loading}>Loading...</p>
       ) : movies.length > 0 ? (
         <MovieList movies={movies} />
       ) : (
-        <p>No trending movies available at the moment.</p>
+        <p className={css.noMovies}>
+          No trending movies available at the moment.
+        </p>
       )}
     </div>
   );

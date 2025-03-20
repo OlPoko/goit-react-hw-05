@@ -16,7 +16,7 @@
 }
 
 .listItem:hover {
-  transform: translateY(-5px); /* Легке підняття при наведенні */
+  transform: translateY(-5px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
@@ -36,9 +36,6 @@
 
 @media (max-width: 768px) {
   .list {
-    grid-template-columns: repeat(
-      auto-fill,
-      minmax(200px, 1fr)
-    ); /* Для менших екранів зменшуємо колонки */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 }

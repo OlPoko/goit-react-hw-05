@@ -1,59 +1,28 @@
-.container {
-  padding: 100px;
-  font-family: Arial, sans-serif;
+.containerHomePage {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-h1 {
-  font-size: 2rem;
-  margin-bottom: 30px;
-  color: #333;
-}
-
-ul {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-
-li {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-  text-align: left;
-}
-
-a {
-  text-decoration: none;
-  color: #007bff;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: #0056b3;
-}
-
-.error {
-  color: red;
-  font-size: 1.2rem;
-  margin-top: 20px;
+.pHomePage {
+  font-size: 2.5rem;
+  color: #20232a;
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .loading {
-  font-size: 1.2rem;
-  color: #007bff;
-  margin-top: 20px;
+  font-size: 1.5rem;
+  color: #666;
+}
+
+.error {
+  font-size: 1.5rem;
+  color: #ff6b6b;
 }
 
 .no-movies {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   color: #666;
-  margin-top: 20px;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding: 10px;
-  }
-  h1 {
-    font-size: 1.5rem;
-  }
 }

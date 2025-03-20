@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { fetchMovieReviews } from "../../movieService"; // Додайте ваш сервіс для отримання відгуків
+import { fetchMovieReviews } from "../../movieService"; 
 import css from "./MovieReviews.module.css";
 
 const MovieReviews = () => {

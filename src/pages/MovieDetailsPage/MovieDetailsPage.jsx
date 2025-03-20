@@ -53,7 +53,7 @@ const MovieDetailsPage = () => {
   };
 
   return (
-    <div>
+    <div className={css.containerDetails}>
       <button className={css.backButton} onClick={goBack}>
         Go back
       </button>

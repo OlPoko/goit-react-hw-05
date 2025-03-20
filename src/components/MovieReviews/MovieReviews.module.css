@@ -42,7 +42,6 @@ p.content {
   margin-top: 10px;
 }
 
-/* Стилі для повідомлення про відсутність відгуків */
 p.noReviews {
   font-style: italic;
   color: gray;
