@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   useParams,
   useLocation,
   useNavigate,
-  Link,
   NavLink,
   Outlet,
 } from "react-router-dom";
@@ -14,31 +13,31 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
+
+  const backLinkRef = useRef(location.state?.from || "/movies");
+
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    async function fetchDetails() {
+    const fetchDetails = async () => {
       try {
         const movieDetails = await fetchMovieDetails(movieId);
-        if (movieDetails) {
-          setMovie(movieDetails);
-        } else {
-          setError("Movie details not found");
-        }
-      } catch (error) {
-        console.error("Error fetching movie details:", error);
+        setMovie(movieDetails);
+      } catch {
         setError("Failed to load movie details");
       } finally {
         setLoading(false);
       }
-    }
+    };
+
     fetchDetails();
   }, [movieId]);
 
-  if (loading) return <p>Loading movie details...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading)
+    return <p className={css.loadingMessage}>Loading movie details...</p>;
+  if (error) return <p className={css.errorMessage}>{error}</p>;
 
   const genres =
     movie.genres?.map((genre) => genre.name).join(", ") ||
@@ -48,9 +47,7 @@ const MovieDetailsPage = () => {
     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
     : "https://via.placeholder.com/300x450";
 
-  const goBack = () => {
-    navigate(location.state?.from ?? "/movies", { replace: true });
-  };
+  const goBack = () => navigate(backLinkRef.current);
 
   return (
     <div className={css.containerDetails}>
@@ -58,24 +55,29 @@ const MovieDetailsPage = () => {
         Go back
       </button>
 
-      <h1 className={css.title}>{movie.title}</h1>
-      <p>{movie.overview}</p>
-      <p className={css.genres}>Genres: {genres}</p>
-      <p className={css.score}>User Score: {userScore}</p>
-      <img
-        src={posterPath}
-        alt={movie.title}
-        style={{ width: "300px", height: "auto", marginTop: "20px" }}
-      />
+      <div className={css.movieInfo}>
+        <img src={posterPath} alt={movie.title} className={css.poster} />
+        <div className={css.textInfo}>
+          <h1 className={css.title}>{movie.title}</h1>
+          <p className={css.overview}>{movie.overview}</p>
+          <p className={css.genres}>
+            <strong>Genres:</strong> {genres}
+          </p>
+          <p className={css.score}>
+            <strong>User Score:</strong> {userScore}
+          </p>
+        </div>
+      </div>
 
-      <ul>
+      <h3>Additional Information</h3>
+      <ul className={css.links}>
         <li>
-          <NavLink to="casts" state={{ from: location.state?.from ?? "/" }}>
-            Casts
+          <NavLink to="casts" state={{ from: backLinkRef.current }}>
+            Cast
           </NavLink>
         </li>
         <li>
-          <NavLink to="reviews" state={{ from: location.state?.from ?? "/" }}>
+          <NavLink to="reviews" state={{ from: backLinkRef.current }}>
             Reviews
           </NavLink>
         </li>

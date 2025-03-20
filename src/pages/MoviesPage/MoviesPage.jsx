@@ -1,35 +1,46 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Імпортуємо useNavigate
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { fetchMovies } from "../../movieService";
 import MovieList from "../../components/MovieList/MovieList";
 import css from "./MoviesPage.module.css";
 
 const MoviesPage = () => {
-  const navigate = useNavigate(); // Ініціалізуємо navigate
-  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleSearch = async (event) => {
+  const query = searchParams.get("query") || "";
+
+  useEffect(() => {
+    if (!query) return;
+
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const result = await fetchMovies(query);
+        setMovies(result);
+      } catch {
+        setError("Failed to fetch movies.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [query]);
+
+  const handleSearch = (event) => {
     event.preventDefault();
     const searchQuery = event.target.search.value.trim();
-    setQuery(searchQuery);
-
-    if (searchQuery) {
-      try {
-        const result = await fetchMovies(searchQuery);
-        setMovies(result);
-        setError(null);
-      } catch (error) {
-        setError("Failed to fetch movies.");
-      }
-    }
+    if (!searchQuery) return;
+    setSearchParams({ query: searchQuery });
   };
 
-  // Функція для повернення на попередню сторінку
-  const goBack = () => {
-    navigate(-1); // Повертає користувача на попередню сторінку
-  };
+  const goBack = () => navigate(-1);
 
   return (
     <div className={css.container}>
@@ -49,10 +60,11 @@ const MoviesPage = () => {
         </button>
       </form>
       {error && <p className={css.errorMessage}>{error}</p>}
-      {movies.length > 0 ? (
+      {loading && <p className={css.loadingMessage}>Loading...</p>}
+      {!loading && movies.length > 0 ? (
         <MovieList movies={movies} />
       ) : (
-        <p className={css.noMoviesMessage}>No movies found.</p>
+        !loading && <p className={css.noMoviesMessage}>No movies found.</p>
       )}
     </div>
   );
