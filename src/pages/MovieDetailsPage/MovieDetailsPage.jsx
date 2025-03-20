@@ -58,10 +58,10 @@ const MovieDetailsPage = () => {
         Go back
       </button>
 
-      <h1>{movie.title}</h1>
+      <h1 className={css.title}>{movie.title}</h1>
       <p>{movie.overview}</p>
-      <p>Genres: {genres}</p>
-      <p>User Score: {userScore}</p>
+      <p className={css.genres}>Genres: {genres}</p>
+      <p className={css.score}>User Score: {userScore}</p>
       <img
         src={posterPath}
         alt={movie.title}
